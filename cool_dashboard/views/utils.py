@@ -60,9 +60,9 @@ def analyze_columns(request):
                     col_types[col] = "User ID"
                 elif low_col[-4:] == 'time':
                     col_types[col] = "Time"
-                elif "event" in low_col and str(column_types[col]) == 'object':
-                    col_types[col] = "Event"
-                    event_related = list(rawdata[col].unique())
+                # elif "event" in low_col and str(column_types[col]) == 'object':
+                #     col_types[col] = "Event"
+                #     event_related = list(rawdata[col].unique())
                 elif str(column_types[col]) == 'object':
                     col_types[col] = "String"
                 else:
@@ -70,8 +70,8 @@ def analyze_columns(request):
                 # logger.info(col)
                 # logger.info(col_types[col])
 
-            for col in event_related:
-                col_types[col] = "Event Related"
+            # for col in event_related:
+            #     col_types[col] = "Event Related"
 
             res = {}
             res['columns'] = columns

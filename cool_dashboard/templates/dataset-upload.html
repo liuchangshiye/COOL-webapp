@@ -5,6 +5,7 @@
 {% block    css %}
     <!-- dropzone css -->
     <link href="{% static 'static/css/dropzone.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'static/css/retention.css' %}">
 {% endblock css %}
 
 {% block    right-body %}
@@ -12,7 +13,7 @@
     <!-- Start right Content here -->
     <!-- ============================================================== -->
     <div class="main-content">
-
+    <div class='cover-div' id='loading'><img class='loading-img' src="{% static 'static/image/loading.svg' %}"></div>
         <div class="page-content">
             <div class="container-fluid">
 
@@ -243,7 +244,12 @@
     function fsubmit(obj){obj.submit();}
     </script>
     <script>
+    $(document).ready(function (){
+        $("#loading").hide();
+    })
+
     $("#btn1").click(function () {
+        $("#loading").show();
         let formdata = new FormData();
         {#let file = $("#csv_file").files;#}
         {#formdata.append('csv_file', file);#}
@@ -258,6 +264,7 @@
             contentType: false,//不让jQuery设置请求的内容类型
             data: formdata,
             success: function (res) {
+                $("#loading").hide();
                 console.log(res)
                 let columns = res['columns']
                 $("#columns").empty()
